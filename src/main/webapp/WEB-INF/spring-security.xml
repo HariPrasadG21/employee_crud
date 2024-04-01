@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:mvc="http://www.springframework.org/schema/mvc"
+             xmlns:tx="http://www.springframework.org/schema/tx"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <beans:bean name="ds"
+                class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/register_db" />
+        <beans:property name="username" value="root" />
+        <beans:property name="password" value="welcome" />
+    </beans:bean>
+    <!--<beans:import resource="spring-servlet.xml"/>-->
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method="getInstance" />
+    <beans:bean id="AuthenticationService" class="com.sc.service.AuthenticationService"/>
+    <mvc:annotation-driven />
+
+    <http auto-config="true">
+        <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+        <csrf disabled="false" />
+    </http>
+    <!--user-service-ref="AuthenticationService"-->
+    <tx:annotation-driven />
+    <!--<context:component-scan base-package="com.sc" />-->
+    <beans:import resource="spring-servlet.xml"/>
+    <authentication-manager>
+        <authentication-provider user-service-ref="AuthenticationService">
+            <password-encoder ref="passwordEncoder"/>
+            <!--<jdbc-user-service data-source-ref="ds"
+                               users-by-username-query="SELECT username,password, enabled FROM users WHERE username=?"
+                               authorities-by-username-query="SELECT u.username, u.authority FROM users u WHERE u.username =?"/>-->
+            <!--<user-service>
+                <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+            </user-service>-->
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>
