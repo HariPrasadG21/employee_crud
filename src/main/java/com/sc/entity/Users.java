@@ -12,7 +12,7 @@ public class Users {
     @Column(name = "username")
     private String username;
     private String password;
-    private boolean enabled;
+    private int enabled;
     private String authority;
 
     public String getUsername() {
@@ -31,12 +31,18 @@ public class Users {
         this.password = password;
     }
 
-    public boolean isEnabled() {
+    public int isEnabled() {
         return this.enabled;
     }
 
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+        if(enabled==true)
+        {
+            this.enabled = 1;
+        }
+        else {
+            this.enabled = 0;
+        }
     }
 
     public String getAuthority() {

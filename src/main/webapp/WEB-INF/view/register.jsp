@@ -28,11 +28,6 @@ pageEncoding="ISO-8859-1"%>
                 <li class="nav-item"><a class="nav-link active"
                                         aria-current="page" href="home">Home</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="register">Register
-                </a></li>
-
-                <li class="nav-item"><a class="nav-link" href="login">Login
-                </a></li>
             </ul>
 
         </div>
@@ -53,25 +48,17 @@ pageEncoding="ISO-8859-1"%>
                 <div class="card-body">
                     <form action="createUser" method="post">
                         <div class="mb-3">
-                            <label>Enter Full Name</label> <input type="text"
-                                                                  name="fullName" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label>Enter Address</label> <input type="text" name="address"
-                                                                class="form-control">
-                        </div>
-
-                        <div class="mb-3">
-                            <label>Enter Email</label> <input type="text" name="email"
-                                                              class="form-control">
+                            <label>Enter Username </label> <input type="text"
+                                                                  name="username" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label>Enter Password</label> <input type="text" name="password"
                                                                  class="form-control">
                         </div>
-
-                        <button class="btn btn-primary col-md-12">Register</button>
+                        <!--<input type="hidden" name="enabled" value="True" class="form-control">
+                        <input type="hidden" name="authority" value="ROLE_ADMIN" class="form-control">-->
+                        <button class="btn btn-primary col-md-12">Add User</button>
                     </form>
                 </div>
             </div>

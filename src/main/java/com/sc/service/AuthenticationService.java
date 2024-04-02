@@ -1,8 +1,6 @@
 package com.sc.service;
 
-import com.sc.dao.EmpDao;
 import com.sc.dao.UsersDao;
-import com.sc.entity.Emp;
 import com.sc.entity.LoginDetails;
 import com.sc.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;

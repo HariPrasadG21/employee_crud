@@ -1,7 +1,9 @@
 package com.sc.controller;
 
+import com.sc.dao.UsersDao;
 import com.sc.entity.Emp;
 import com.sc.entity.User;
+import com.sc.entity.Users;
 import com.sc.service.EmpService;
 import com.sc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class HomeController {
     private EmpService empService;
     @Autowired
     private  UserService userService;
+    @Autowired
+    private UsersDao usersDao;
     @RequestMapping(path = "/home")
     public String home(Model m)
     {
@@ -26,33 +30,7 @@ public class HomeController {
         m.addAttribute("emplist",elist);
         return "home";
     }
-/*
-    private static String authorizationRequestBaseUri
-            = "oauth2/authorization";
-    Map<String, String> oauth2AuthenticationUrls
-            = new HashMap<>();
-*/
 
-  /*  @Autowired
-    private ClientRegistrationRepository clientRegistrationRepository;
-*/
-  /*  @GetMapping("/oauth_login")
-    public String getLoginPage(Model model) {
-        Iterable<ClientRegistration> clientRegistrations = null;
-        ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
-                .as(Iterable.class);
-        if (type != ResolvableType.NONE &&
-                ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
-            clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
-        }
-
-        clientRegistrations.forEach(registration ->
-                oauth2AuthenticationUrls.put(registration.getClientName(),
-                        authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
-        model.addAttribute("urls", oauth2AuthenticationUrls);
-
-        return "oauth_login";
-    }*/
     @RequestMapping(path = "/addEmp")
     public String addEmp()
     {
@@ -89,20 +67,24 @@ public class HomeController {
         return "redirect:/home";
     }
 
-    /*@RequestMapping(path = "/register")
+    @RequestMapping(path = "/register")
     public String registerPage()
     {
         return "register";
     }
-    @RequestMapping(path = "/login")
+    /*@RequestMapping(path = "/login")
     public String loginPage()
     {
         return "login";
     }*/
     @RequestMapping(path = "/createUser",method = RequestMethod.POST)
-    public String register(@ModelAttribute User user,HttpSession session){
-        System.out.println(user);
-        userService.saveUser(user);
+    public String register(@RequestParam String username,@RequestParam String password, HttpSession session){
+        Users user = new Users();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEnabled(true);
+        user.setAuthority("ROLE_ADMIN");
+        int i = usersDao.saveUser(user);
         session.setAttribute("msg","User registered Successfully");
         return "redirect:/register";
     }

@@ -25,9 +25,9 @@ pageEncoding="ISO-8859-1"%>
                 <li class="nav-item">
                     <a class="nav-link" href="addEmp">Add Employee</a>
                 </li>
-                <!--<li class="nav-item">
-                <a class="nav-link" href="register"> Register</a>
-                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="register"> Add User</a>
+                </li>
                 <!--<li class="nav-item">
                 <a class="nav-link" href="login">Login</a>
                 </li>-->

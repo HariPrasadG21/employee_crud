@@ -1,11 +1,11 @@
 package com.sc.dao;
 
-import com.sc.entity.User;
 import com.sc.entity.Users;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UsersDao {
@@ -31,5 +31,11 @@ public class UsersDao {
             return query.uniqueResult();
         });
         return user;
+    }
+    @Transactional(readOnly = false)
+    public int saveUser(Users user)
+    {
+        String username = (String) hibernateTemplate.save(user);
+        return 1;
     }
 }

@@ -22,7 +22,14 @@ public class LoginDetails implements UserDetails {
         username = emp.getUsername();
         password = emp.getPassword();
         authority = emp.getAuthority();
-        enabled = emp.isEnabled();
+        if(emp.isEnabled()==1)
+        {
+            enabled = true;
+        }
+        else {
+            enabled=false;
+        }
+
     }
 
     @Override
