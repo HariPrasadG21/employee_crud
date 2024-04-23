@@ -37,9 +37,9 @@
                   value="com.mysql.cj.jdbc.Driver" />
 
         <property name="url"
-                  value="jdbc:mysql://localhost:3306/register_db" />
+                  value="jdbc:mysql://localhost:3306/register_db?createDatabaseIfNotExist=true" />
         <property name="username" value="root" />
-        <property name="password" value="welcome" />
+        <property name="password" value="root" />
     </bean>
 
 
@@ -60,7 +60,6 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.sc.entity.Emp</value>
-                <value>com.sc.entity.User</value>
                 <value>com.sc.entity.Users</value>
             </list>
         </property>
@@ -75,14 +74,5 @@
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="factory" />
     </bean>
-
-    <!--<mvc:annotation-driven />
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/myProfile" />
-            <bean class="com.sc.interceptor.AuthInterceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>-->
-
 
 </beans>

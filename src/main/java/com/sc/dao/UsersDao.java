@@ -22,6 +22,7 @@ public class UsersDao {
         });
         return user;
     }
+    @Transactional
     public Users getByUsername(String username)
     {
         String sql = "from Users where username =:nm ";

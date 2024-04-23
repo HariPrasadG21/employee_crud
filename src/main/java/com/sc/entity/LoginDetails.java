@@ -2,11 +2,10 @@ package com.sc.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.ArrayList;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,11 +17,12 @@ public class LoginDetails implements UserDetails {
     private boolean enabled;
     private String authority;
     private Users users;
-    public LoginDetails(Users emp) {
-        username = emp.getUsername();
-        password = emp.getPassword();
-        authority = emp.getAuthority();
-        if(emp.isEnabled()==1)
+
+    public LoginDetails(Users user) {
+        username = user.getUsername();
+        password = user.getPassword();
+        authority = user.getAuthority();
+        if(user.isEnabled()==1)
         {
             enabled = true;
         }

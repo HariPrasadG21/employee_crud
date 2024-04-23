@@ -1,7 +1,6 @@
 package com.sc.dao;
 
 import com.sc.entity.Emp;
-import com.sc.entity.User;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
